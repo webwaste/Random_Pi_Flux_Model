@@ -3,6 +3,11 @@ This repository contains the codes for solving random pi-flux model.
 ----------------------------------------------------------------------
 Programs in the root folders: 
 
+[rand_pi_flux_generator.cpp] Generate a lattice dimension Lx, Ly and randomly choose given number of plaquettes and assign pi-flux to them.
+
+Usage:   ./rand_pi_flux_generator Lx Ly N_pi
+Example: ./rand_pi_flux_generator 50 50 40
+
 [gauge_fixer.cpp] Takes a lattice configuration file as input where the plaquettes states are given and return a lattice configuration file where the edge states (Z's) are consistent with the plaquettes configuration. 
 
 [ham_constructor.cpp] Takes a lattice configuration file as input with appropriate edges and plaquettes configuration and return the Hamiltonian matrix in single particle basis. 
@@ -19,9 +24,12 @@ Header files:
 [matrix.h] Contains the matrix class. So far matrix class has not been used. Eigen package will be used most probably. 
 
 ----------------------------------------------------------------------
-Data files: 
+Data files:
+ 
 [rand_pi_flux.lat] Lattice configuration after defining the pi-flux-configuration.
+[rand_pi_flux.list]List of positions of the pi-flux plaquettes.
 [fixed_gauge.lat]  Lattice configuration after computing the consistent edge states.
 [Hamiltonian.mat]  Hamiltonian matrix for a given plaquettes configuration.
 [dos.dat]          list of density of states for different energies.
 [dos_plot.pdf]     Plot of density of states.
+----------------------------------------------------------------------

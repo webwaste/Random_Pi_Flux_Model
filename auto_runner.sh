@@ -3,7 +3,7 @@
 #This is to automate the process of running the codes sequentially.
 echo 
 echo "####################################"
-./rand_pi_flux_generator
+./rand_pi_flux_generator 8 8 26 
 echo "Random pi-flux generation done."
 ./gauge_fixer
 echo "Gauge fixed."

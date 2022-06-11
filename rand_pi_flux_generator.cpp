@@ -3,14 +3,14 @@
 #include <random>
 #include<algorithm>
 
-int main(){
-	int Lx = 4; 
-	int Ly = 4; 
+int main(int argc, char** argv){
+	int Lx = stoi(argv[1]); 
+	int Ly = stoi(argv[2]); 
+	int N_pi = stoi(argv[3]); 
 	lattice lat(Lx,Ly);
 	ofstream ofile("Data/rand_pi_flux.list");
 
 	vector<int> pi_flux; 
-	int N_pi = 6; // number of pi-flux plaquettes (must be even).
 
 	int min = 0;
 	int max = Lx*Ly-1;
