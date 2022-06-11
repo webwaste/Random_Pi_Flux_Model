@@ -1,12 +1,11 @@
-#include"lattice.h"
+#include"Headers/lattice.h"
+#include"Headers/supl_func.h"
 #include<vector>
 //The purpse of this module is to take a predefined pi-flux configuration
 //and fix the gauge(values of the edges) 
 //and return a lattice configuration as outuput.
 
-template <typename T> int sgn(T val) {
-	    return (T(0) < val) - (val < T(0));
-}
+
 
 
 int main(){
@@ -21,7 +20,6 @@ int main(){
 		for(int j =0; j<lat.Nx(); j++){
 			if(lat.plqt(j,i)){
 				pi_flux_list.push_back(lat.Nx()*i + j);
-				cout<<"pi_flux found at "<<j<<" "<<i<<endl;
 			}
 		}
 	}

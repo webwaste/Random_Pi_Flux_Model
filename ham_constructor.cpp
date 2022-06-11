@@ -1,4 +1,4 @@
-#include"lattice.h"
+#include"Headers/lattice.h"
 #include<eigen3/Eigen/Core>
 using namespace Eigen;
 

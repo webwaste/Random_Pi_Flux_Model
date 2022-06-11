@@ -13,6 +13,10 @@ using namespace std;
 using namespace Eigen; 
 using MatrixXc = Matrix<complex<double>, Dynamic, Dynamic>;
 
+template <typename T> int sgn(T val) {
+	//Signum function. returns the sign of a non-zero number. and returns 0 for 0.
+	    return (T(0) < val) - (val < T(0));
+}
 
 int C(const int N, int n){
 	// ================================================

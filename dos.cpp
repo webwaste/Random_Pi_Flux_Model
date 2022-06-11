@@ -1,5 +1,5 @@
-#include"supl_func.h"
-#include"lattice.h"
+#include"Headers/supl_func.h"
+#include"Headers/lattice.h"
 #include<eigen3/Eigen/Core>
 using namespace Eigen;
 
