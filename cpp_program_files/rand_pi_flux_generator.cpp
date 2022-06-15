@@ -3,10 +3,15 @@
 #include <random>
 #include<algorithm>
 
-int main(int argc, char** argv){
-	int Lx = stoi(argv[1]); 
-	int Ly = stoi(argv[2]); 
-	int N_pi = stoi(argv[3]); 
+int main(){
+	ifstream input("config.txt");
+	int Lx = 2; 
+	int Ly = 2; 
+	int N_pi = 2; 
+	input>>Lx;
+	input>>Ly;
+	input>>N_pi;
+
 	lattice lat(Lx,Ly);
 	ofstream ofile("Data/rand_pi_flux.list");
 
