@@ -11,8 +11,8 @@ def dos(H, E, eta, dim):
     return -(np.trace(G).imag)/(math.pi)
 
 def main():
-    N = 500;  #no of partion in dos plotting axis.
-    N_it = 100; #number of iteration.
+    N = 1000;  #no of partion in dos plotting axis.
+    N_it = 150; #number of iteration.
     DOS = np.zeros((N_it,N));
     for i in range(N_it):
         sp.call("./cpp_executables/rand_pi_flux_generator");
@@ -30,8 +30,13 @@ def main():
 
     DOS_avg = np.sum(DOS,axis=0)/N_it;
 
+    file = open("Data/parallel_dos.dat", "w");
+    for i in range(N):
+            file.write(str(E[i])+" "+str(DOS_avg[i])+"\n");
+    
+    file.close();
 
-    np.savetxt('Data/parallel_dos.dat',DOS_avg,delimiter='\n')
+#    np.savetxt('Data/parallel_dos.dat',DOS_avg,delimiter='\n')
     
 tic = time.time()
 if __name__ == "__main__":
