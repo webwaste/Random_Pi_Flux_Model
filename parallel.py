@@ -3,6 +3,7 @@ import subprocess as sp
 import numpy as np
 import math
 import time
+import json
 
 
 def dos(H, E, eta, dim):
@@ -11,8 +12,12 @@ def dos(H, E, eta, dim):
     return -(np.trace(G).imag)/(math.pi)
 
 def main():
-    N = 500;  #no of partion in dos plotting axis.
-    N_it = 300; #number of iteration.
+    #Rading the json files 
+    config_file = open("config.json",'r');
+    config = json.load(config_file);
+    N = config["DOS_partitions"];  #no of partion in dos plotting axis.
+    N_it = config["No_of_sampling"];  #no of partion in dos plotting axis.
+
     DOS = np.zeros((N_it,N));
     for i in range(N_it):
         sp.call("./cpp_executables/rand_pi_flux_generator");

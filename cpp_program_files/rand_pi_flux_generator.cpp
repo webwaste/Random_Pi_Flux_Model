@@ -2,15 +2,18 @@
 #include<vector>
 #include <random>
 #include<algorithm>
+#include<fstream>
+#include<json/json.h>
 
 int main(){
-	ifstream input("config.txt");
-	int Lx = 2; 
-	int Ly = 2; 
-	int N_pi = 2; 
-	input>>Lx;
-	input>>Ly;
-	input>>N_pi;
+	ifstream input("config.json");
+	Json::Reader reader; 
+	Json::Value config; 
+	reader.parse(input,config);
+
+	int Lx = (config["Lx"]).asInt(); 
+	int Ly = (config["Ly"]).asInt(); 
+	int N_pi = (config["No_of_plaquettes"]).asInt(); 
 
 	lattice lat(Lx,Ly);
 	ofstream ofile("Data/rand_pi_flux.list");

@@ -9,7 +9,6 @@
 
 
 int main(){
-
 	string input_file = "Data/rand_pi_flux.lat";
 	lattice lat(2,2);
 	lat.read(input_file);
