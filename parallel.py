@@ -11,8 +11,8 @@ def dos(H, E, eta, dim):
     return -(np.trace(G).imag)/(math.pi)
 
 def main():
-    N = 1000;  #no of partion in dos plotting axis.
-    N_it = 150; #number of iteration.
+    N = 500;  #no of partion in dos plotting axis.
+    N_it = 300; #number of iteration.
     DOS = np.zeros((N_it,N));
     for i in range(N_it):
         sp.call("./cpp_executables/rand_pi_flux_generator");
@@ -21,22 +21,24 @@ def main():
     
         H = np.loadtxt("Data/Hamiltonian.mat", dtype = float);
         dim = H.shape[0];
-        eta = 0.01
-        E = np.linspace(-4.5,4.5,N)
+        eta = 0.005
+        E = np.linspace(-4,4,N)
         pool = mp.Pool(mp.cpu_count())
         DOS[i] = pool.starmap(dos, [(H,En,eta,dim) for En in E])
         pool.close();
         print("iteration: ",i+1);
 
-    DOS_avg = np.sum(DOS,axis=0)/N_it;
+    np.savetxt("Data/dos_raw_matrix.dat",DOS,fmt="%s")
 
-    file = open("Data/parallel_dos.dat", "w");
-    for i in range(N):
-            file.write(str(E[i])+" "+str(DOS_avg[i])+"\n");
-    
-    file.close();
+#    DOS_avg = np.sum(DOS,axis=0)/N_it;
+#    DOS_var = np.sum(np.square(DOS),axis=0)/N_it - np.square(DOS_avg);
+#
+#    file = open("Data/parallel_dos.dat", "w");
+#    for i in range(N):
+#            file.write(str(E[i])+" "+str(DOS_avg[i])+" "+str(np.sqrt(DOS_var[i])/np.sqrt(N-1))+"\n");
+#    
+#    file.close();
 
-#    np.savetxt('Data/parallel_dos.dat',DOS_avg,delimiter='\n')
     
 tic = time.time()
 if __name__ == "__main__":
