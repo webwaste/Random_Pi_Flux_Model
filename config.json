@@ -2,8 +2,8 @@
     "Lx":16,
     "Ly":16,
     "No_of_plaquettes":216,
-    "eta":0.005,
-    "No_of_sampling":300,
-    "DOS_partitions":500
+    "eta":0.0001,
+    "No_of_sampling":1000,
+    "DOS_partitions":1000
 }
 

@@ -7,7 +7,7 @@ import json
 
 
 def dos(H, E, eta, dim):
-    G = np.linalg.inv((E + eta*(1j))*np.identity(dim) - H)
+    G = np.linalg.inv((E + eta*(1j))*np.identity(dim) - H)/dim
     #print("E: %.2f"%E);
     return -(np.trace(G).imag)/(math.pi)
 

@@ -12,9 +12,9 @@ def main():
     config = json.load(config_file);
     N_it = config["No_of_sampling"];
     N = config["DOS_partitions"];
-    for N_samp in np.linspace(50,N_it,6):
+    for N_samp in np.linspace(100,N_it,10):
         print(N_samp);
-        DOS = np.loadtxt("Data/dos_raw_matrix.dat")[0:int(N_samp)];
+        DOS = np.loadtxt("Data/dos_raw_matrix_test.dat")[0:int(N_samp)];
         DOS_avg = np.sum(DOS,axis=0)/N_samp;
         DOS_var = np.sum(np.square(DOS),axis=0)/N_samp - np.square(DOS_avg);
         E = np.linspace(-4,4,N);
