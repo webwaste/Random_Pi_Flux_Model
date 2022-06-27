@@ -25,7 +25,7 @@ def main():
     Ly = config["Ly"]
     dim = Lx*Ly
 
-    EIG = np.loadtxt("Data/eigen_val.dat")[0:int(N_samp)];
+    EIG = np.loadtxt("Data/eigen_val_"+str(Lx)+"_"+str(Ly)+".dat")[0:int(N_samp)];
     print("Eig: ",np.shape(EIG));
     DOS = np.zeros((N_samp,N_dos)); 
     print("dos: ",np.shape(DOS));
@@ -35,11 +35,9 @@ def main():
 
     for i in range(N_samp):
         print("sampling no: ",i);
-#        pool = mp.Pool(mp.cpu_count());
-#        DOS[i] += pool.starmap(dos,[(En, eta, E) for En in EIG[i]])
         DOS[i] = dos(EIG[i],eta,E,dim)
 
-    np.savetxt("Data/dos_raw_matrix_test.dat",DOS,fmt="%s");
+    np.savetxt("Data/raw_dos_"+str(Lx)+"_"+str(Ly)+".dat",DOS,fmt="%s");
 
 
     

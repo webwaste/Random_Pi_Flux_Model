@@ -30,7 +30,7 @@ def main():
         EIG[i] = eig(H);
         print("Sampling: ",i+1);
 
-    np.savetxt("Data/eigen_val.dat",EIG,fmt="%s")
+    np.savetxt("Data/eigen_val_"+str(Lx)+"_"+str(Ly)+".dat",EIG,fmt="%s")
 
     
 tic = time.time()
