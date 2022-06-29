@@ -1,19 +1,27 @@
 #!/bin/sh
 
-#This is to automate the process of running the codes sequentially.
+#This is to automate the process of running the codes for different values of p.
 echo 
-echo "####################################"
-./cpp_executables/rand_pi_flux_generator 8 8 50 
-echo "Random pi-flux generation done."
-./cpp_executables/gauge_fixer
-echo "Gauge fixed."
-./cpp_executables/ham_constructor
-echo "Hamiltonian construction done."
-time ./cpp_executables/dos
-echo "DOS computation done."
-gnuplot plotter.p
-echo "DOS graph plotting done."
-echo "####################################"
+for p in 0.8 0.82 0.84 0.86 0.88 0.90 0.92 0.94 0.96 0.98 1.0
+do
+    echo "Probability of plaquettes: "$p
+    python plqts_adjstr.py $p
+    echo "Number of Plaquettes adjusted."
+    echo
+    echo "Eigen values are being dumped for each random configuration"
+    echo
+    python eig_dumper.py
+    echo
+    echo "Eigen values are being used to calculate density of states."
+    echo
+    python eig2dos.py
+    echo 
+    echo "DOS for random configurations are being averaged."
+    echo
+    python averager.py
+    echo
+
+done
+echo
+echo "Calculation complete"
 echo 
-
-

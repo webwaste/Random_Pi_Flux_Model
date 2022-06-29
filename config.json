@@ -1,9 +1,11 @@
 {
-    "Lx":24,
-    "Ly":24,
-    "No_of_plaquettes":484,
-    "eta":0.01,
-    "No_of_sampling":1000,
-    "DOS_partitions":1000
+    "Lx": 32,
+    "Ly": 32,
+    "No_of_plaquettes": 820,
+    "Probability": 0.8,
+    "eta": 0.01,
+    "No_of_sampling": 1000,
+    "DOS_partitions": 1000,
+    "lower_energy_limit_of_dos": -4,
+    "upper_energy_limit_of_dos": 4
 }
-

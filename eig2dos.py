@@ -1,9 +1,11 @@
 import multiprocessing as mp
 import subprocess as sp
 import numpy as np
+from tqdm import tqdm
 import math
 import time
 import json
+import os
 
 def dos(EigenVl, eta, E,dim):
     #En is a  
@@ -24,20 +26,16 @@ def main():
     Lx = config["Lx"]
     Ly = config["Ly"]
     dim = Lx*Ly
+    p = config["Probability"]
 
-    EIG = np.loadtxt("Data/eigen_val_"+str(Lx)+"_"+str(Ly)+".dat")[0:int(N_samp)];
-    print("Eig: ",np.shape(EIG));
+    EIG = np.loadtxt("Data/"+str(Lx)+"X"+str(Ly)+"/eigen_val_"+str(Lx)+"_"+str(Ly)+"_"+str(p)+".dat")[0:int(N_samp)];
     DOS = np.zeros((N_samp,N_dos)); 
-    print("dos: ",np.shape(DOS));
-    print("dos[0]: ",np.shape(DOS[0]));
     E = np.linspace(-4,4,N_dos);
-    print("E: ",np.shape(E));
 
-    for i in range(N_samp):
-        print("sampling no: ",i);
+    for i in tqdm(range(N_samp),desc="Progress",ascii=False,ncols=75):
         DOS[i] = dos(EIG[i],eta,E,dim)
 
-    np.savetxt("Data/raw_dos_"+str(Lx)+"_"+str(Ly)+".dat",DOS,fmt="%s");
+    np.savetxt("Data/"+str(Lx)+"X"+str(Ly)+"/raw_dos_"+str(Lx)+"_"+str(Ly)+"_"+str(p)+".dat",DOS,fmt="%s");
 
 
     
@@ -46,5 +44,5 @@ if __name__ == "__main__":
     main()
     t = time.time() - tic; 
     
-    print(int(t//3600), " hours ",(t%3600)//60, " minutes ", (t%3600)%60, "seconds" )
+    print("Time taken: ",int(t//3600), " hours ",(t%3600)//60, " minutes ", (t%3600)%60, "seconds" )
 
