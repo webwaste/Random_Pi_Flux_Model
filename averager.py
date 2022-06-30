@@ -20,7 +20,7 @@ def main():
     l_lim = config["lower_energy_limit_of_dos"]
     u_lim = config["upper_energy_limit_of_dos"]
 
-    DOS = np.loadtxt("Data/"+str(Lx)+"X"+str(Ly)+"/raw_dos_"+str(Lx)+"_"+str(Ly)+"_"+str(p)+".dat")[0:int(N_samp)];
+    DOS = np.load("Data/"+str(Lx)+"X"+str(Ly)+"/raw_dos_"+str(Lx)+"_"+str(Ly)+"_"+str(p)+".npy")[0:int(N_samp)];
     DOS_avg = np.sum(DOS,axis=0)/N_samp;
     DOS_var = np.sum(np.square(DOS),axis=0)/N_samp - np.square(DOS_avg);
     E = np.linspace(l_lim,u_lim,N_dos);

@@ -34,7 +34,7 @@ def main():
         EIG[i] = eig(H);
 
     os.makedirs("Data/"+str(Lx)+"X"+str(Ly), exist_ok=True);
-    np.savetxt("Data/"+str(Lx)+"X"+str(Ly)+"/eigen_val_"+str(Lx)+"_"+str(Ly)+"_"+str(p)+".dat",EIG,fmt="%s")
+    np.save("Data/"+str(Lx)+"X"+str(Ly)+"/eigen_val_"+str(Lx)+"_"+str(Ly)+"_"+str(p),EIG)
 
     
 tic = time.time()

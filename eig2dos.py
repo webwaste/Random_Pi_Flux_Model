@@ -28,14 +28,14 @@ def main():
     dim = Lx*Ly
     p = config["Probability"]
 
-    EIG = np.loadtxt("Data/"+str(Lx)+"X"+str(Ly)+"/eigen_val_"+str(Lx)+"_"+str(Ly)+"_"+str(p)+".dat")[0:int(N_samp)];
+    EIG = np.load("Data/"+str(Lx)+"X"+str(Ly)+"/eigen_val_"+str(Lx)+"_"+str(Ly)+"_"+str(p)+".npy")[0:int(N_samp)];
     DOS = np.zeros((N_samp,N_dos)); 
     E = np.linspace(-4,4,N_dos);
 
     for i in tqdm(range(N_samp),desc="Progress",ascii=False,ncols=75):
         DOS[i] = dos(EIG[i],eta,E,dim)
 
-    np.savetxt("Data/"+str(Lx)+"X"+str(Ly)+"/raw_dos_"+str(Lx)+"_"+str(Ly)+"_"+str(p)+".dat",DOS,fmt="%s");
+    np.save("Data/"+str(Lx)+"X"+str(Ly)+"/raw_dos_"+str(Lx)+"_"+str(Ly)+"_"+str(p),DOS);
 
 
     
