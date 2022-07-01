@@ -7,6 +7,22 @@ import math
 import time
 import json
 import os
+import glob
+
+
+def eigen_dumper(i):
+    print("i: ",i);
+    proc_id = mp.current_process().pid
+    sp.run(["./cpp_executables/rand_pi_flux_generator",str(proc_id)]);
+    sp.run(["./cpp_executables/gauge_fixer",str(proc_id)]);
+    sp.run(["./cpp_executables/ham_constructor",str(proc_id)]);
+
+    H = np.loadtxt("Data/"+str(proc_id)+"Hamiltonian.mat", dtype = float);
+    #deleting the unnecessary files
+    for filename in glob.glob("Data/"+str(proc_id)+"*"):
+        os.remove(filename);
+
+    return np.linalg.eigvalsh(H);
 
 
 def main():
@@ -22,13 +38,15 @@ def main():
     dim = Lx*Ly;
     EIG = np.zeros((N_samp,dim));
 
-    for i in tqdm(range(N_samp), desc="Progress: ", ascii=False,ncols=75):
-        sp.call("./cpp_executables/rand_pi_flux_generator");
-        sp.call("./cpp_executables/gauge_fixer");
-        sp.call("./cpp_executables/ham_constructor");
-    
-        H = np.loadtxt("Data/Hamiltonian.mat", dtype = float);
-        EIG[i] = np.linalg.eigvalsh(H);
+    n_proc_max = mp.cpu_count();
+    pool = mp.Pool(2);
+
+#    for i in tqdm(range(N_samp), desc="Progress: ", ascii=False,ncols=75):
+#    for i in range(N_samp):
+    EIG = pool.map(eigen_dumper,range(N_samp));
+
+    pool.close()
+    pool.join()
 
     os.makedirs("Data/"+str(Lx)+"X"+str(Ly), exist_ok=True);
     np.save("Data/"+str(Lx)+"X"+str(Ly)+"/eigen_val_"+str(Lx)+"_"+str(Ly)+"_"+str(p),EIG)

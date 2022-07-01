@@ -5,7 +5,12 @@
 #include<fstream>
 #include<json/json.h>
 
-int main(){
+int main(int argc, char* argv[]){
+	string pid=""; 
+	if(argc==2){
+		pid = argv[1];
+	}
+
 	ifstream input("config.json");
 	Json::Reader reader; 
 	Json::Value config; 
@@ -16,7 +21,7 @@ int main(){
 	int N_pi = (config["No_of_plaquettes"]).asInt(); 
 
 	lattice lat(Lx,Ly);
-	ofstream ofile("Data/rand_pi_flux.list");
+	ofstream ofile("Data/"+pid+"rand_pi_flux.list");
 
 	vector<int> pi_flux; 
 
@@ -43,16 +48,8 @@ int main(){
 		else continue; 
 	}
 	ofile.close();
-	lat.write("Data/rand_pi_flux.lat");
+	lat.write("Data/"+pid+"rand_pi_flux.lat");
 
 
 	return 0; 
 }
-	/*
-
-	
-	for(int i=0; i<N_pi; i++){
-
-	
-	
-*/

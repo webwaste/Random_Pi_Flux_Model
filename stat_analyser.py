@@ -12,13 +12,15 @@ def main():
     config = json.load(config_file);
     N_it = config["No_of_sampling"];
     N = config["DOS_partitions"];
+    Lx = config["Lx"]
+    Ly = config["Ly"]
     for N_samp in np.linspace(100,N_it,10):
-        print(N_samp);
-        DOS = np.loadtxt("Data/dos_raw_matrix_test.dat")[0:int(N_samp)];
+        print("Number of samples considered: ",N_samp);
+        DOS = np.loadtxt("Data/raw_dos_"+str(Lx)+"_"+str(Ly)+".dat")[0:int(N_samp)];
         DOS_avg = np.sum(DOS,axis=0)/N_samp;
         DOS_var = np.sum(np.square(DOS),axis=0)/N_samp - np.square(DOS_avg);
         E = np.linspace(-4,4,N);
-        file = open("Data/dos_samp_"+str(N_samp)+".dat", "w");
+        file = open("Data/dos_samp_"+str(N_samp)+"_"+str(Lx)+"_"+str(Ly)+".dat", "w");
         for i in range(N):
                 file.write(str(E[i])+" "+str(DOS_avg[i])+" "+str(np.sqrt(DOS_var[i])/np.sqrt(N_samp-1))+"\n");
         

@@ -5,11 +5,16 @@ using namespace Eigen;
 //Eigen package takes care of the linear algebra stuffs. 
 
 
-int main(){
+int main(int argc, char* argv[]){
+	string pid=""; 
+	if(argc==2){
+		pid = argv[1];
+	}
+
 	double mu = 0; // chemical potential
 			
 	lattice lat(2,2); //Initialization
-	lat.read("Data/fixed_gauge.lat");
+	lat.read("Data/"+pid+"fixed_gauge.lat");
 
 	int dim = lat.Nx()*lat.Ny(); // Dimension of the hamiltonian matrix
 	MatrixXd hamiltonian(dim,dim);
@@ -38,7 +43,7 @@ int main(){
 		}
 	}
 	//Writing the hamiltonian into a file
-	ofstream ham("Data/Hamiltonian.mat");
+	ofstream ham("Data/"+pid+"Hamiltonian.mat");
 	ham<<hamiltonian; 
 	ham.close();
 }

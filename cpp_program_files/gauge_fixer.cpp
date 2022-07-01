@@ -8,8 +8,13 @@
 
 
 
-int main(){
-	string input_file = "Data/rand_pi_flux.lat";
+int main(int argc, char* argv[]){
+	string pid=""; 
+	if(argc==2){
+		pid = argv[1];
+	}
+		
+	string input_file = "Data/"+pid+"rand_pi_flux.lat";
 	lattice lat(2,2);
 	lat.read(input_file);
 	vector<int> pi_flux_list; //The consecutive elements are assumed to be coupled, starting from zero. 
@@ -61,6 +66,6 @@ int main(){
 			}
 		}
 	}
-	lat.write("Data/fixed_gauge.lat");
+	lat.write("Data/"+pid+"fixed_gauge.lat");
 	
 }
