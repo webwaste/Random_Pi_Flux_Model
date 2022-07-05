@@ -15,14 +15,16 @@ def eigen_dumper(i):
     proc_id = mp.current_process().pid
     sp.run(["./cpp_executables/rand_pi_flux_generator",str(proc_id)]);
     sp.run(["./cpp_executables/gauge_fixer",str(proc_id)]);
-    sp.run(["./cpp_executables/ham_constructor",str(proc_id)]);
+    #sp.run(["./cpp_executables/ham_constructor",str(proc_id)]);
+    sp.run(["./cpp_executables/eigval_generator",str(proc_id)]);
 
-    H = np.loadtxt("Data/"+str(proc_id)+"Hamiltonian.mat", dtype = float);
+#    H = np.loadtxt("Data/"+str(proc_id)+"Hamiltonian.mat", dtype = float);
     #deleting the unnecessary files
     for filename in glob.glob("Data/"+str(proc_id)+"*"):
         os.remove(filename);
 
-    return np.linalg.eigvalsh(H);
+    
+#    return np.linalg.eigvalsh(H);
 
 
 def main():
@@ -39,11 +41,12 @@ def main():
     EIG = np.zeros((N_samp,dim));
 
     n_proc_max = mp.cpu_count();
-    pool = mp.Pool(2);
+    pool = mp.Pool(4);
 
 #    for i in tqdm(range(N_samp), desc="Progress: ", ascii=False,ncols=75):
 #    for i in range(N_samp):
-    EIG = pool.map(eigen_dumper,range(N_samp));
+  #  EIG = pool.map(eigen_dumper,range(N_samp));
+    pool.map(eigen_dumper,range(N_samp));
 
     pool.close()
     pool.join()

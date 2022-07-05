@@ -1,10 +1,10 @@
 {
-    "Lx": 32,
-    "Ly": 32,
-    "No_of_plaquettes": 820,
-    "Probability": 0.8,
+    "Lx": 62,
+    "Ly": 62,
+    "No_of_plaquettes": 3152,
+    "Probability": 0.82,
     "eta": 0.01,
-    "No_of_sampling": 1000,
+    "No_of_sampling": 10,
     "DOS_partitions": 1000,
     "lower_energy_limit_of_dos": -4,
     "upper_energy_limit_of_dos": 4
