@@ -70,8 +70,9 @@ int main(int argc, char* argv[]){
 //	ofstream eig_file("Data/"+Lx+"X"+Ly+"/eigen_val_"+Lx+"_"+Ly+"_"+p+".dat");
 	ofstream eig_file("Data/temp.eig");
 	for(int i =0; i<ham.row; i++){
-		eig_file<<eigval[i]<<"\t";
+		eig_file<<eigval[i]<<"\n";
 	}
+	eig_file.close();
 
 	//Writing the hamiltonian into a file
 /*	ofstream ham("Data/"+pid+"Hamiltonian.mat");
